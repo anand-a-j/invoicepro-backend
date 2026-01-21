@@ -1,0 +1,16 @@
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\bin\Debug\net9.0\InvoicePro.Application.deps.json
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\bin\Debug\net9.0\InvoicePro.Application.dll
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\bin\Debug\net9.0\InvoicePro.Application.pdb
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\bin\Debug\net9.0\InvoicePro.Domain.dll
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\bin\Debug\net9.0\InvoicePro.Domain.pdb
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoicePro.Application.csproj.AssemblyReference.cache
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoicePro.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoicePro.Application.AssemblyInfoInputs.cache
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoicePro.Application.AssemblyInfo.cs
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoicePro.Application.csproj.CoreCompileInputs.cache
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoicePro.Application.sourcelink.json
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoiceP.C925822E.Up2Date
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoicePro.Application.dll
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\refint\InvoicePro.Application.dll
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\InvoicePro.Application.pdb
+C:\Users\anand\OneDrive\Desktop\c#\InvoicePro\src\InvoicePro.Application\obj\Debug\net9.0\ref\InvoicePro.Application.dll
