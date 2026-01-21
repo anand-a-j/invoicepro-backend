@@ -33,6 +33,43 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "InvoicePro.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "InvoicePro.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/InvoicePro.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InvoicePro.Application.dll": {}
+        }
+      },
+      "InvoicePro.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/InvoicePro.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InvoicePro.Domain.dll": {}
+        }
+      },
+      "InvoicePro.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "InvoicePro.Application": "1.0.0",
+          "InvoicePro.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/InvoicePro.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InvoicePro.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -67,10 +104,27 @@
         "microsoft.openapi.1.6.17.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "InvoicePro.Application/1.0.0": {
+      "type": "project",
+      "path": "../InvoicePro.Application/InvoicePro.Application.csproj",
+      "msbuildProject": "../InvoicePro.Application/InvoicePro.Application.csproj"
+    },
+    "InvoicePro.Domain/1.0.0": {
+      "type": "project",
+      "path": "../InvoicePro.Domain/InvoicePro.Domain.csproj",
+      "msbuildProject": "../InvoicePro.Domain/InvoicePro.Domain.csproj"
+    },
+    "InvoicePro.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../InvoicePro.Infrastructure/InvoicePro.Infrastructure.csproj",
+      "msbuildProject": "../InvoicePro.Infrastructure/InvoicePro.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "InvoicePro.Application >= 1.0.0",
+      "InvoicePro.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.10"
     ]
   },
@@ -98,7 +152,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\anand\\OneDrive\\Desktop\\c#\\InvoicePro\\src\\InvoicePro.Application\\InvoicePro.Application.csproj": {
+              "projectPath": "C:\\Users\\anand\\OneDrive\\Desktop\\c#\\InvoicePro\\src\\InvoicePro.Application\\InvoicePro.Application.csproj"
+            },
+            "C:\\Users\\anand\\OneDrive\\Desktop\\c#\\InvoicePro\\src\\InvoicePro.Infrastructure\\InvoicePro.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\anand\\OneDrive\\Desktop\\c#\\InvoicePro\\src\\InvoicePro.Infrastructure\\InvoicePro.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
