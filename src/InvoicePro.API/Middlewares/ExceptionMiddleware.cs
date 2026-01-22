@@ -1,9 +1,7 @@
 using System.Net;
-using System.Reflection.Metadata;
 using System.Text.Json;
 using InvoicePro.API.Core;
 using InvoicePro.Application.Exceptions;
-
 
 public class ExceptionMiddleware
 {

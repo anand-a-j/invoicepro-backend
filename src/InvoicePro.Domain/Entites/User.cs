@@ -9,9 +9,7 @@ public class User : BaseEntity
     public string FullName {get; private set; } = null!;
     public UserRole Role {get; private set;} = UserRole.Owner;
     public Guid OrganizationId {get; private set;}
-
     public Organization Organization { get; private set; } = null!;
-
     public bool IsActive { get; private set; } = true;
 
     protected User() { }
