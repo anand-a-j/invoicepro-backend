@@ -10,10 +10,10 @@ public class AppDbContext : DbContext
     public DbSet<User> Users {get; set;}
     public DbSet<Organization> Organizations {get; set;}
 
-    protected override void OodelCreating(ModelBuilder modelBuilder)
-    {
+    // protected override void OodelCreating(ModelBuilder modelBuilder)
+    // {
         
 
-        base.OnModelCreating(modelBuilder);
-    }
+    //     base.OnModelCreating(modelBuilder);
+    // }
 }

@@ -18,13 +18,12 @@ public class User : BaseEntity
        string email,
        string passwordHash,
        string fullName,
-       Guid organizationId,
-       UserRole role = UserRole.Owner)
+       UserRole role = UserRole.Owner
+       )
     {
         Email = email.ToLowerInvariant();
         PasswordHash = passwordHash;
         FullName = fullName;
-        OrganizationId = organizationId;
         Role = role;
     }
 

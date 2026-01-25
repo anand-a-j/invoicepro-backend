@@ -1,8 +1,9 @@
+using InvoicePro.Application.Interfaces.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace InvoicePro.Infrastructure.Identity;
 
-public class PasswordHasher
+public class PasswordHasher : IPasswordHasher
 {
     private readonly PasswordHasher<object> _hasher = new();
 
