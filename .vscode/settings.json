@@ -1,7 +1,7 @@
 {
-  "editor.renderIndentGuides": true,
-  "editor.highlightActiveIndentGuide": true,
-  "editor.renderWhitespace": "none",
+    "editor.renderWhitespace": "none",
   "editor.detectIndentation": false,
-  "editor.tabSize": 4
+"editor.tabSize": 4,
+"editor.guides.indentation": true,
+"editor.guides.highlightActiveIndentation": true
 }

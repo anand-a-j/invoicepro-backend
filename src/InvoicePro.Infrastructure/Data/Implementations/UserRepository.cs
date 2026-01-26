@@ -20,7 +20,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> GetByEmailAsync(string email)
     {
-        return await _db.Users
+        return await _db.Users.AsNoTracking()
           .FirstOrDefaultAsync(u => u.Email == email.ToLower());
     }
 
@@ -28,7 +28,7 @@ public class UserRepository : IUserRepository
     public async Task AddAsync(User user)
     {
         await _db.Users.AddAsync(user);
-        await  _db.SaveChangesAsync();
+        await _db.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(User user)

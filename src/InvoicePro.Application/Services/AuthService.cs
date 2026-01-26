@@ -59,4 +59,33 @@ public class AuthService : IAuthService
 
         return authResponseDto;
     }
+
+    public async Task<AuthResponseDto> LoginAsync(UserLoginRequestDto req)
+    {
+        var user = await _userRepository.GetByEmailAsync(req.Email);
+
+        if (user == null)
+            throw new AppException("Invalid email or password", System.Net.HttpStatusCode.Unauthorized);
+
+        var isPasswordVaild = _passwordHasher.Verify(req.Password, user.PasswordHash);
+
+        if (!isPasswordVaild)
+            throw new AppException("Invalid email or password", System.Net.HttpStatusCode.Unauthorized);
+
+        var userResponseDto = new UserDto
+        {
+            Id = user.Id,
+            Email = user.Email,
+            FullName = user.FullName,
+            Role = user.Role,
+        };
+
+        var authResponseDto = new AuthResponseDto
+        {
+            Token = _jwt.GenerateToken(user),
+            User = userResponseDto
+        };
+
+        return authResponseDto;
+    }
 }
