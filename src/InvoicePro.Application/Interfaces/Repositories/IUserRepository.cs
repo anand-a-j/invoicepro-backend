@@ -1,6 +1,6 @@
 using InvoicePro.Domain.Entities;
 
-namespace InvoicePro.Infrastructure.Data.Repositories;
+namespace InvoicePro.Interfaces.Data.Repositories;
 
 public interface IUserRepository
 {

@@ -27,6 +27,14 @@ public class User : BaseEntity
         Role = role;
     }
 
+    public void AssignOrganization(
+        Organization org
+    )
+    {
+        OrganizationId = org.Id;
+        Organization = org;
+    }
+
     public void Deactivate()
     {
         IsActive = false;

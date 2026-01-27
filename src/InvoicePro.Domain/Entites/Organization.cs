@@ -16,6 +16,16 @@ public class Organization : BaseEntity
         Address = address;
     }
 
+    public void UpdateName(string name)
+    {
+        Name = name;
+    }
+
+    public void UpdateAddress(string address)
+    {
+        Address = address;
+    }
+
     public void UpdateContact(string? email, string? phone)
     {
         Email = email;

@@ -3,7 +3,7 @@ using InvoicePro.Application.Exceptions;
 using InvoicePro.Application.interfaces;
 using InvoicePro.Application.Interfaces.Identity;
 using InvoicePro.Domain.Entities;
-using InvoicePro.Infrastructure.Data.Repositories;
+using InvoicePro.Interfaces.Data.Repositories;
 
 
 namespace InvoicePro.Application.Services;

@@ -130,9 +130,6 @@ InvoicePro/
 │       │   └── PasswordHasher.cs
 │       └── Migrations/
 │
-├── tests/                                        # Optional but impressive
-│   ├── InvoicePro.UnitTests/
-│   └── InvoicePro.IntegrationTests/
 │
 ├── .gitignore
 ├── README.md

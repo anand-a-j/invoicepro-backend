@@ -20,6 +20,13 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Register([FromBody] RegisterUserRequestDto req)
     {
         var result = await _authService.RegisterAsync(req);
-        return Ok(ApiResponse<AuthResponseDto>.Ok(result, "registered successfully"));
+        return Ok(ApiResponse<AuthResponseDto>.Ok(result, "Registered successfully"));
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] UserLoginRequestDto req)
+    {
+        var result = await _authService.LoginAsync(req);
+        return Ok(ApiResponse<AuthResponseDto>.Ok(result, "Login successfully"));
     }
 }
