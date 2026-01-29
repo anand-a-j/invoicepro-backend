@@ -11,6 +11,11 @@ public class OrganizationController : ControllerBase
 {
     private readonly IOrganizationSerivce _orgService;
 
+    public OrganizationController(IOrganizationSerivce orgService)
+    {
+        _orgService = orgService;
+    }
+
     [HttpPost]
     public async Task<ActionResult<OrgResponseDto>> Create([FromBody] CreateOrgRequestDto req)
     {

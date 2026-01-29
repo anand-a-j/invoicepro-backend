@@ -1,5 +1,5 @@
 using InvoicePro.Domain.Entities;
-using InvoicePro.Infrastructure.Data.Repositories;
+using InvoicePro.Interfaces.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace InvoicePro.Infrastructure.Implementations;

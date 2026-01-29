@@ -10,6 +10,8 @@ public class AppDbContext : DbContext
     public DbSet<User> Users {get; set;}
     public DbSet<Organization> Organizations {get; set;}
 
+    public DbSet<Customer> Customers {get;set;}
+
     // protected override void OodelCreating(ModelBuilder modelBuilder)
     // {
         
