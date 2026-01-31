@@ -8,7 +8,6 @@ InvoicePro/
 │   │   │   ├── AuthController.cs
 │   │   │   ├── OrganizationsController.cs
 │   │   │   ├── CustomersController.cs
-│   │   │   ├── ServicesController.cs
 │   │   │   ├── InvoicesController.cs
 │   │   │   ├── PaymentsController.cs
 │   │   │   └── ReportsController.cs

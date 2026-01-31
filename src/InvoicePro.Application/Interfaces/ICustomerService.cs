@@ -1,3 +1,4 @@
+using InvoicePro.Application.DTOs.Common;
 using InvoicePro.Application.DTOs.Customer;
 
 namespace InvoicePro.Application.interfaces;
@@ -9,8 +10,10 @@ public interface ICustomerService
         
     Task<CustomerResponseDto> UpdateAsync(
       Guid customerId,
-      UpdateCustomerRequestDto dto,
-      Guid orgId);
+      UpdateCustomerRequestDto dto);
 
-    Task DeleteAsync(Guid customerId, Guid orgId);
+    Task DeleteAsync(Guid customerId);
+
+    Task<PagedResultDto<CustomerResponseDto>>
+    GetListAsync(CustomerListRequestDto req);
 }

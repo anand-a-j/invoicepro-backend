@@ -5,7 +5,6 @@ using InvoicePro.Application.Interfaces.Identity;
 using InvoicePro.Domain.Entities;
 using InvoicePro.Interfaces.Data.Repositories;
 
-
 namespace InvoicePro.Application.Services;
 
 public class AuthService : IAuthService

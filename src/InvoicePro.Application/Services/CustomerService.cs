@@ -1,8 +1,11 @@
 using System.Net;
+using InvoicePro.Application.DTOs.Common;
 using InvoicePro.Application.DTOs.Customer;
 using InvoicePro.Application.Exceptions;
 using InvoicePro.Application.interfaces;
 using InvoicePro.Interfaces.Data.Repositories;
+
+namespace InvoicePro.Application.Services;
 
 class CustomerService : ICustomerService
 {
@@ -22,9 +25,9 @@ class CustomerService : ICustomerService
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId) ??
          throw new AppException("User not found", HttpStatusCode.NotFound);
 
-        if (user.OrganizationId != Guid.Empty)
+        if (user.OrganizationId == Guid.Empty)
             throw new AppException(
-              "User does not belong to any organization",
+               "User does not belong to any organization",
               HttpStatusCode.BadRequest
           );
 
@@ -51,11 +54,21 @@ class CustomerService : ICustomerService
         return customerResponseDto;
     }
 
-    public async Task<CustomerResponseDto> UpdateAsync(Guid customerId, UpdateCustomerRequestDto dto, Guid orgId)
+    public async Task<CustomerResponseDto> UpdateAsync(Guid customerId, UpdateCustomerRequestDto dto)
     {
+        var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
+       ?? throw new AppException("User not found", HttpStatusCode.NotFound);
+
+        if (user.OrganizationId == Guid.Empty)
+            throw new AppException(
+                "User does not belong to any organization",
+                HttpStatusCode.BadRequest
+            );
+
+
         var customer = await _customerRepository.GetByIdAsync(customerId);
 
-        if (customer == null || customer.OrganizationId != orgId)
+        if (customer == null || customer.OrganizationId != user.OrganizationId)
             throw new AppException("Customer not found", HttpStatusCode.NotFound);
 
         customer.Update(
@@ -79,13 +92,58 @@ class CustomerService : ICustomerService
         return customerResponseDto;
     }
 
-    public async Task DeleteAsync(Guid customerId, Guid orgId)
+    public async Task DeleteAsync(Guid customerId)
     {
+        var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
+            ?? throw new AppException("User not found", HttpStatusCode.NotFound);
+
+        if (user.OrganizationId == Guid.Empty)
+            throw new AppException(
+                "User does not belong to any organization",
+                HttpStatusCode.BadRequest
+            );
+
         var customer = await _customerRepository.GetByIdAsync(customerId);
 
-        if (customer == null || customer.OrganizationId != orgId)
+        if (customer == null || customer.OrganizationId != user.OrganizationId)
             throw new AppException("Customer not found", HttpStatusCode.NotFound);
 
         await _customerRepository.DeleteAsync(customer);
+    }
+
+    public async Task<PagedResultDto<CustomerResponseDto>> 
+    GetListAsync(CustomerListRequestDto req)
+    {
+        var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
+        ?? throw new AppException("User not found", HttpStatusCode.NotFound);
+
+        if (user.OrganizationId == Guid.Empty)
+            throw new AppException(
+                "User does not belong to any organization",
+                HttpStatusCode.BadRequest
+            );
+
+       var (items, totalCount) = await _customerRepository.GetPagedAsync(
+        user.OrganizationId,
+        req.Page,
+        req.PageSize,
+        req.Search
+       );
+
+       return new PagedResultDto<CustomerResponseDto>
+       {
+           Items = items.Select(c=> new CustomerResponseDto
+           {
+               Id = c.Id,
+               Name = c.Name,
+               Email = c.Email,
+               Phone = c.Phone,
+               Address = c.Address,
+           }
+           ).ToList(),
+           TotalCount = totalCount,
+           Page = req.Page,
+           PageSize = req.PageSize
+       };
     }
 }
