@@ -1,3 +1,4 @@
+using InvoicePro.Domain.Entities;
 using InvoicePro.Interfaces.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,9 +36,23 @@ public class InvoiceRepository : IInvoiceRepository
         await _db.SaveChangesAsync();
     }
 
-    public Task<(List<Invoice> Items, int TotalCount)> GetPagedAsync(
+    public async Task<(List<Invoice> Items, int TotalCount)> GetPagedAsync(
         Guid orgId, int page, int pageSize, string? search)
     {
-        
+       var query = _db.Invoices.AsNoTracking().Where(x=> x.OrganizationId == orgId);
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            query = query.Where(x=> x.InvoiceNumber.Contains(search));
+        } 
+
+        var TotalCount = await query.CountAsync();
+
+        var items = await query.OrderByDescending(x => x.IssueDate)
+        .Skip((page -1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
+
+        return (items, TotalCount);
     }
 }

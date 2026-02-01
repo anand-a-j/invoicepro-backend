@@ -1,3 +1,5 @@
+using InvoicePro.Domain.Entities;
+
 namespace InvoicePro.Interfaces.Data.Repositories;
 
 public interface IInvoiceRepository

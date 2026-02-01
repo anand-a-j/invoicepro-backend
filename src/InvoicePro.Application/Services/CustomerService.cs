@@ -111,8 +111,8 @@ class CustomerService : ICustomerService
         await _customerRepository.DeleteAsync(customer);
     }
 
-    public async Task<PagedResultDto<CustomerResponseDto>> 
-    GetListAsync(CustomerListRequestDto req)
+    public async Task<PagedResultDto<CustomerResponseDto>>
+    GetListAsync(GetCustomerListRequestDto req)
     {
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
         ?? throw new AppException("User not found", HttpStatusCode.NotFound);
@@ -123,27 +123,27 @@ class CustomerService : ICustomerService
                 HttpStatusCode.BadRequest
             );
 
-       var (items, totalCount) = await _customerRepository.GetPagedAsync(
-        user.OrganizationId,
-        req.Page,
-        req.PageSize,
-        req.Search
-       );
+        var (items, totalCount) = await _customerRepository.GetPagedAsync(
+         user.OrganizationId,
+         req.Page,
+         req.PageSize,
+         req.Search
+        );
 
-       return new PagedResultDto<CustomerResponseDto>
-       {
-           Items = items.Select(c=> new CustomerResponseDto
-           {
-               Id = c.Id,
-               Name = c.Name,
-               Email = c.Email,
-               Phone = c.Phone,
-               Address = c.Address,
-           }
-           ).ToList(),
-           TotalCount = totalCount,
-           Page = req.Page,
-           PageSize = req.PageSize
-       };
+        return new PagedResultDto<CustomerResponseDto>
+        {
+            Items = items.Select(c => new CustomerResponseDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Email = c.Email,
+                Phone = c.Phone,
+                Address = c.Address,
+            }
+            ).ToList(),
+            TotalCount = totalCount,
+            Page = req.Page,
+            PageSize = req.PageSize
+        };
     }
 }

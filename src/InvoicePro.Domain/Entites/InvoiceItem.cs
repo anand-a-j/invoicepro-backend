@@ -1,5 +1,7 @@
 using InvoicePro.Domain.Exceptions;
 
+namespace InvoicePro.Domain.Entities;
+
 public class InvoiceItem
 {
     public Guid Id {get; private set;}

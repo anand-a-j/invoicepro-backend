@@ -1,6 +1,6 @@
-namespace InvoicePro.Application.DTOs.Customer;
+namespace InvoicePro.Application.DTOs.Invoice;
 
-public class GetCustomerListRequestDto
+public class GetInvoiceListRequestDto
 {
     public int Page { get; set; } = 1;
     public int PageSize { get; set; } = 10;

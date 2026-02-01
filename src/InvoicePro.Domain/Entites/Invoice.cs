@@ -1,5 +1,6 @@
-using InvoicePro.Domain.Entities;
 using InvoicePro.Domain.Exceptions;
+
+namespace InvoicePro.Domain.Entities;
 
 public class Invoice : BaseEntity
 {

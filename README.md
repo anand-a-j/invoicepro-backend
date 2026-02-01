@@ -128,8 +128,6 @@ InvoicePro/
 │       │   ├── JwtTokenGenerator.cs
 │       │   └── PasswordHasher.cs
 │       └── Migrations/
-│
-│
 ├── .gitignore
 ├── README.md
 ├── Dockerfile                                    # Optional

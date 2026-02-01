@@ -7,7 +7,7 @@ public interface ICustomerService
 {
     Task<CustomerResponseDto> CreateAsync(
         CreateCustomerRequestDto req);
-        
+
     Task<CustomerResponseDto> UpdateAsync(
       Guid customerId,
       UpdateCustomerRequestDto dto);
@@ -15,5 +15,5 @@ public interface ICustomerService
     Task DeleteAsync(Guid customerId);
 
     Task<PagedResultDto<CustomerResponseDto>>
-    GetListAsync(CustomerListRequestDto req);
+    GetListAsync(GetCustomerListRequestDto req);
 }
