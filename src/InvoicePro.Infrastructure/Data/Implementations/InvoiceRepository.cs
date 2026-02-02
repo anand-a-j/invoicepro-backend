@@ -55,4 +55,13 @@ public class InvoiceRepository : IInvoiceRepository
 
         return (items, TotalCount);
     }
+
+    public async Task<int?> GetLastSequenceNumberAsync(Guid orgId)
+    {
+        return await _db.Invoices
+        .Where(i => i.OrganizationId == orgId)
+        .OrderByDescending(i => i.SequenceNumber)
+        .Select(i => i.SequenceNumber)
+        .FirstOrDefaultAsync();
+    }
 }

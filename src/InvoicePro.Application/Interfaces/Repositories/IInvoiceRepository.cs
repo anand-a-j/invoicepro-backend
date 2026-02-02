@@ -9,4 +9,5 @@ public interface IInvoiceRepository
     Task UpdateAsync(Invoice invoice);
     Task DeleteAsync(Invoice invoice);
     Task<(List<Invoice> Items, int TotalCount)> GetPagedAsync(Guid orgId, int page, int pageSize, string? search);
+    Task<int?> GetLastSequenceNumberAsync(Guid orgId);
 }

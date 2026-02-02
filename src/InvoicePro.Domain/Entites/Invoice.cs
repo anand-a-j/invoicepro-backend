@@ -8,6 +8,7 @@ public class Invoice : BaseEntity
     public Guid CustomerId { get; private set; }
 
     public string InvoiceNumber {get; private set; } = null!;
+    public int SequenceNumber { get; private set; }
     public DateTime IssueDate {get; private set;}
     public DateTime? DueDate {get; private set;}
 
@@ -25,6 +26,7 @@ public class Invoice : BaseEntity
        Guid organizationId,
        Guid customerId,
        string invoiceNumber,
+       int sequenceNumber,
        DateTime issueDate,
        DateTime? dueDate
    )
@@ -33,6 +35,7 @@ public class Invoice : BaseEntity
         OrganizationId = organizationId;
         CustomerId = customerId;
         InvoiceNumber = invoiceNumber;
+        SequenceNumber = sequenceNumber;
         IssueDate = issueDate;
         DueDate = dueDate;
 
