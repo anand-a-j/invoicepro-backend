@@ -95,7 +95,6 @@ InvoicePro/
 │   │   │   └── RateType.cs
 │   │   └── Constants/
 │   │       └── BusinessRules.cs
-│   │
 │   └── InvoicePro.Infrastructure/               # Data Access Layer
 │       ├── Data/
 │       │   ├── ApplicationDbContext.cs

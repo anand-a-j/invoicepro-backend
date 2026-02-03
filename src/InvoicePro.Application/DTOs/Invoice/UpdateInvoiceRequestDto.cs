@@ -3,6 +3,7 @@ namespace InvoicePro.Application.DTOs.Invoice;
 public class UpdateInvoiceRequestDto
 {
     public Guid CustomerId { get; set; }
+    public Guid InvoiceId {get;set;}
     public DateTime IssueDate { get; set; }
     public DateTime? DueDate { get; set; }
 

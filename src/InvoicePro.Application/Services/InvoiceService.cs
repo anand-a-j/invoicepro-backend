@@ -80,30 +80,139 @@ class InvoiceService : IInvoiceService
         return InvoiceMapper.MapToResponse(invoice, customerResponseDto);
     }
 
-
-
-    public Task DeleteAsync(Guid invoiceId)
+    public async Task<InvoiceResponseDto> UpdateAsync(UpdateInvoiceRequestDto req)
     {
-        throw new NotImplementedException();
+      var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
+    ?? throw new AppException("User not found", HttpStatusCode.NotFound);
+
+        if (user.OrganizationId == Guid.Empty)
+            throw new AppException(
+                "User does not belong to any organization",
+                HttpStatusCode.BadRequest
+            );
+
+        var invoice = await _invoiceRepository.GetByIdAsync(req.InvoiceId);
+
+        if (invoice == null || invoice.OrganizationId != user.OrganizationId)
+            throw new AppException("Invoice not found", HttpStatusCode.NotFound);
+
+        var customer = await _customerRepository.GetByIdAsync(invoice.CustomerId)
+         ?? throw new AppException("Customer not found", HttpStatusCode.NotFound);
+
+        if (invoice.Status != InvoiceStatus.Draft)
+          throw new AppException(
+             "Only draft invoices can be updated",
+             HttpStatusCode.BadRequest
+          );
+
+
+        if(req.CustomerId != customer.Id)
+        {
+            invoice.UpdateCustomer(req.CustomerId);
+        }
+
+        if(req.DueDate != invoice.DueDate)
+        {
+            invoice.UpdateDueDate(req.DueDate);
+        }
+
+        var newItems = req.Items.Select(i =>
+        new InvoiceItem(i.Description,i.Amount)
+        );
+
+        invoice.ReplaceItems(newItems);
+
+        await _invoiceRepository.UpdateAsync(invoice);
+
+        var customerResponseDto = new CustomerResponseDto
+        {
+            Id = customer.Id,
+            Name = customer.Name,
+            Email = customer.Email,
+            Phone = customer.Phone,
+            Address = customer.Address
+        };
+
+        return InvoiceMapper.MapToResponse(invoice, customerResponseDto);
     }
 
-    public Task<InvoiceResponseDto> GetByIdAsync(Guid id)
+    public async Task<InvoiceResponseDto> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
+           ?? throw new AppException("User not found", HttpStatusCode.NotFound);
+
+        var invoice = await _invoiceRepository.GetByIdAsync(id);
+
+        if (invoice == null || invoice.OrganizationId != user.OrganizationId)
+            throw new AppException("Invoice not found", HttpStatusCode.NotFound);
+
+       var customer = await _customerRepository.GetByIdAsync(invoice.CustomerId)
+       ?? throw new AppException("Customer not found", HttpStatusCode.NotFound);
+
+        var customerResponseDto = new CustomerResponseDto
+        {
+            Id = customer.Id,
+            Name = customer.Name,
+            Email = customer.Email,
+            Phone = customer.Phone,
+            Address = customer.Address
+        };
+
+        return InvoiceMapper.MapToResponse(invoice, customerResponseDto);
     }
 
-    public Task<PagedResultDto<InvoiceResponseDto>> GetListAsync(GetInvoiceListRequestDto req)
+    public async Task DeleteAsync(Guid invoiceId)
     {
-        throw new NotImplementedException();
+        var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
+         ?? throw new AppException("User not found", HttpStatusCode.NotFound);
+
+        var invoice = await _invoiceRepository.GetByIdAsync(invoiceId);
+
+        if (invoice == null || invoice.OrganizationId != user.OrganizationId)
+            throw new AppException("Invoice not found", HttpStatusCode.NotFound);
+
+        if (invoice.Status != InvoiceStatus.Draft)
+            throw new AppException(
+                "Only draft invoices can be deleted",
+                HttpStatusCode.BadRequest
+            );
+
+        await _invoiceRepository.DeleteAsync(invoice);
     }
 
-    public Task MarkAsPaidAsync(Guid invoiceId)
+    public async Task MarkAsPaidAsync(Guid invoiceId)
     {
-        throw new NotImplementedException();
+        var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
+             ?? throw new AppException("User not found", HttpStatusCode.NotFound);
+
+        var invoice = await _invoiceRepository.GetByIdAsync(invoiceId);
+
+        if (invoice == null || invoice.OrganizationId != user.OrganizationId)
+            throw new AppException("Invoice not found", HttpStatusCode.NotFound);
+
+        invoice.MarkAsPaid();
+
+        await _invoiceRepository.UpdateAsync(invoice);
     }
 
-    public Task<InvoiceResponseDto> UpdateAsync(UpdateInvoiceRequestDto req)
+    public async Task<PagedResultDto<InvoiceResponseDto>> GetListAsync(GetInvoiceListRequestDto req)
     {
-        throw new NotImplementedException();
+       var user = await _userRepository.GetByIdAsync(_currentUser.UserId) ??
+        throw new AppException("User not found", HttpStatusCode.NotFound);
+
+      var (items, totalCount) = await _invoiceRepository.GetPagedAsync(
+        user.OrganizationId,
+        req.Page,
+        req.PageSize,
+        req.Search
+      );
+
+      return new PagedResultDto<InvoiceResponseDto>
+      {
+          Items = items,
+          TotalCount = totalCount,
+          Page = req.Page,
+          PageSize = req.PageSize
+      };
     }
 }

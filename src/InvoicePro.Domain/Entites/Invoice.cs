@@ -51,6 +51,31 @@ public class Invoice : BaseEntity
         RecalculateTotals();
     }
 
+    public void ReplaceItems(IEnumerable<InvoiceItem> items)
+    {
+        EnsureEditable();
+
+        _items.Clear();
+
+        foreach (var item in items)
+        {
+            _items.Add(item);
+        }
+
+        RecalculateTotals();
+    }
+
+    public void UpdateCustomer(Guid customerId)
+    {
+        EnsureEditable();
+        CustomerId = customerId;
+    }
+
+
+    public void UpdateDueDate(DateTime? dueDate)
+    {
+        DueDate = dueDate;
+    }
 
     public void MarkAsPaid()
     {
