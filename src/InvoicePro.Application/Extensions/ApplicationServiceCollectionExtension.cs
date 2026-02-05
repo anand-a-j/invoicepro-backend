@@ -1,5 +1,6 @@
 using InvoicePro.Application.interfaces;
 using InvoicePro.Application.Services;
+using InvoicePro.Interfaces.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InvoicePro.Application.Extensions;
