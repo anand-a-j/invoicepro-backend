@@ -14,11 +14,12 @@ public class AppDbContext : DbContext
     public DbSet<Invoice> Invoices { get; set; }
 
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+       modelBuilder.ApplyConfigurationsFromAssembly(
+        typeof(AppDbContext).Assembly
+       );
 
-    // protected override void OodelCreating(ModelBuilder modelBuilder)
-    // {
-
-
-    //     base.OnModelCreating(modelBuilder);
-    // }
+        base.OnModelCreating(modelBuilder);
+    }
 }
