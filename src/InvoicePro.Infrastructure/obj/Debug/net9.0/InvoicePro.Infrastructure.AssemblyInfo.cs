@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InvoicePro.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+571ba630781b1c67f5e7d69886cb6d5f5438f1dc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67b968a04fc6e1d02130bee89f8202e89eb71bbb")]
 [assembly: System.Reflection.AssemblyProductAttribute("InvoicePro.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InvoicePro.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
