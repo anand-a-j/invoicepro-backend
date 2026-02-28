@@ -5,7 +5,9 @@ using FluentValidation.AspNetCore;
 using InvoicePro.API.Extensions;
 using InvoicePro.Application;
 using InvoicePro.Application.DTOs.Auth;
+using InvoicePro.Application.Extensions;
 using InvoicePro.Infrastructure;
+using InvoicePro.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -25,6 +27,9 @@ builder.Services.AddValidatorsFromAssembly(
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+builder.Services.AddInfrastructure();
+builder.Services.AddApplication();
 
 builder.Services.AddAuthentication(options =>
 {
