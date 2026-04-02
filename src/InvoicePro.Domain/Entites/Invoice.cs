@@ -7,18 +7,16 @@ public class Invoice : BaseEntity
     public Guid OrganizationId { get; private set; }
     public Guid CustomerId { get; private set; }
 
-    public string InvoiceNumber {get; private set; } = null!;
+    public string InvoiceNumber { get; private set; } = null!;
     public int SequenceNumber { get; private set; }
-    public DateTime IssueDate {get; private set;}
-    public DateTime? DueDate {get; private set;}
+    public DateTime IssueDate { get; private set; }
+    public DateTime? DueDate { get; private set; }
 
-    public decimal SubTotal {get; private set;}
-    public decimal TotalAmount { get; private set;}
+    public decimal SubTotal { get; private set; }
+    public decimal TotalAmount { get; private set; }
 
     public InvoiceStatus Status { get; private set; }
-    private readonly List<InvoiceItem> _items = new();
-    public IReadOnlyCollection<InvoiceItem> Items => _items.AsReadOnly();
-
+    public List<InvoiceItem> Items { get; set; } = new();
 
     private Invoice() { }
 
@@ -46,7 +44,7 @@ public class Invoice : BaseEntity
     {
         EnsureEditable();
 
-        _items.Add(new InvoiceItem(description, amount));
+        Items.Add(new InvoiceItem(description, amount));
 
         RecalculateTotals();
     }
@@ -55,11 +53,11 @@ public class Invoice : BaseEntity
     {
         EnsureEditable();
 
-        _items.Clear();
+        this.Items.Clear();
 
         foreach (var item in items)
         {
-            _items.Add(item);
+            this.Items.Add(item);
         }
 
         RecalculateTotals();
@@ -87,7 +85,7 @@ public class Invoice : BaseEntity
 
     private void RecalculateTotals()
     {
-        SubTotal = _items.Sum(x => x.Amount);
+        SubTotal = Items.Sum(x => x.Amount);
         TotalAmount = SubTotal;
     }
 

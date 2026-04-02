@@ -1,3 +1,4 @@
+using InvoicePro.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +20,7 @@ public class InvoiceItemConfiguration : IEntityTypeConfiguration<InvoiceItem>
             .HasPrecision(18, 2);
 
         builder.HasOne<Invoice>()
-            .WithMany("_items")
+            .WithMany("Items")
             .HasForeignKey("InvoiceId")
             .OnDelete(DeleteBehavior.Cascade);
     }

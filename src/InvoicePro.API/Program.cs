@@ -4,20 +4,21 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using InvoicePro.API.Extensions;
 using InvoicePro.Application;
-using InvoicePro.Application.DTOs.Auth;
 using InvoicePro.Application.Extensions;
 using InvoicePro.Infrastructure;
 using InvoicePro.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssembly(

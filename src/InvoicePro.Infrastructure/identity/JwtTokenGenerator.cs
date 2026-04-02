@@ -6,7 +6,7 @@ using InvoicePro.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-public class JwtTokenGenerator
+public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly IConfiguration _config;
 

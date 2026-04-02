@@ -1,4 +1,5 @@
 using InvoicePro.Application.interfaces;
+using InvoicePro.Application.Interfaces.Identity;
 using InvoicePro.Application.Services;
 using InvoicePro.Interfaces.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,8 @@ public static class ApplicationServiceCollectionExtensions
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IInvoiceService, InvoiceService>();
         services.AddScoped<IOrganizationSerivce, OrganizationService>();
+
+
 
         return services;
     }

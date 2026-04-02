@@ -1,4 +1,6 @@
 using InvoicePro.Application.interfaces;
+using InvoicePro.Application.Interfaces.Identity;
+using InvoicePro.Infrastructure.Identity;
 using InvoicePro.Infrastructure.Implementations;
 using InvoicePro.Interfaces.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,11 @@ public static class InfrastructureServiceCollectionExtensions
         services.AddScoped<IInvoiceRepository, InvoiceRepository>();
         services.AddScoped<IOrganizationRepository, OrganizationRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+
+        services.AddScoped<ICurrentUser, CurrentUser>();
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
         return services;
     }
