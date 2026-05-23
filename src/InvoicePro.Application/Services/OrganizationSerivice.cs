@@ -31,12 +31,12 @@ class OrganizationService : IOrganizationSerivce
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId) ??
          throw new AppException("User not found", HttpStatusCode.NotFound);
 
-        if(user.OrganizationId != Guid.Empty)
+        if (user.OrganizationId != Guid.Empty)
             throw new AppException(
               "User already has an organization",
               HttpStatusCode.BadRequest
           );
-        
+
         var organization = new Organization(req.Name, req.Address);
         organization.UpdateContact(req.Email, req.Phone);
 
@@ -75,11 +75,19 @@ class OrganizationService : IOrganizationSerivce
                 HttpStatusCode.Forbidden
             );
 
-        var organization = await _orgRepository.GetByIdAsync(user.OrganizationId)
+        if (user.OrganizationId == null)
+            throw new AppException(
+                "User does not belong to any organization",
+                HttpStatusCode.BadRequest
+            );
+
+        var orgId = user.OrganizationId.Value;
+
+        var organization = await _orgRepository.GetByIdAsync(orgId)
       ?? throw new AppException("Organization not found", HttpStatusCode.NotFound);
 
-      if(req.Name is not null)
-       organization.UpdateName(req.Name);
+        if (req.Name is not null)
+            organization.UpdateName(req.Name);
 
 
         if (req.Address is not null)

@@ -31,7 +31,7 @@ InvoicePro/
 │   │   │   │   └── AuthResponseDto.cs
 │   │   │   ├── Organizations/
 │   │   │   │   ├── OrganizationDto.cs
-│   │   │   │   └── CreateOrganizationDto.cs
+│   │   │   │   └── CreateOrganizationDto.csp
 │   │   │   ├── Customers/
 │   │   │   │   ├── CustomerDto.cs
 │   │   │   │   ├── CreateCustomerDto.cs

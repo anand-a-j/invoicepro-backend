@@ -25,15 +25,15 @@ public class CustomersController : ControllerBase
         return Ok(ApiResponse<CustomerResponseDto>.Ok(result, "Customer added successfully"));
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Update([FromBody] Guid customerId, UpdateCustomerRequestDto req)
+    [HttpPut("{customerId}")]
+    public async Task<IActionResult> Update( Guid customerId, [FromBody] UpdateCustomerRequestDto req)
     {
         var result = await _customerService.UpdateAsync(customerId, req);
         return Ok(ApiResponse<CustomerResponseDto>.Ok(result, "Customer updated successfully"));
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> Delete([FromBody] Guid customerId)
+    [HttpDelete("{customerId}")]
+    public async Task<IActionResult> Delete(Guid customerId)
     {
         await _customerService.DeleteAsync(customerId);
         return Ok(ApiResponse<bool>.Ok(true,"Customer deleted successfully"));

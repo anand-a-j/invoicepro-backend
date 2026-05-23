@@ -25,16 +25,18 @@ class CustomerService : ICustomerService
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId) ??
          throw new AppException("User not found", HttpStatusCode.NotFound);
 
-        if (user.OrganizationId == Guid.Empty)
+        if (user.OrganizationId == null)
             throw new AppException(
-               "User does not belong to any organization",
-              HttpStatusCode.BadRequest
-          );
+                "User does not belong to any organization",
+                HttpStatusCode.BadRequest
+            );
+
+        var orgId = user.OrganizationId.Value;
 
 
         var customer = new Customer(
             req.Name,
-            user.OrganizationId,
+            orgId,
             req.Email,
             req.Phone,
             req.Address
@@ -117,14 +119,16 @@ class CustomerService : ICustomerService
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
         ?? throw new AppException("User not found", HttpStatusCode.NotFound);
 
-        if (user.OrganizationId == Guid.Empty)
+        if (user.OrganizationId == null)
             throw new AppException(
                 "User does not belong to any organization",
                 HttpStatusCode.BadRequest
             );
 
+        var orgId = user.OrganizationId.Value;
+
         var (items, totalCount) = await _customerRepository.GetPagedAsync(
-         user.OrganizationId,
+         orgId,
          req.Page,
          req.PageSize,
          req.Search
