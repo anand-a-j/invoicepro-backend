@@ -1,6 +1,7 @@
 using InvoicePro.API.Core;
 using InvoicePro.Application.DTOs.Organization;
 using InvoicePro.Application.interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvoicePro.API.Controllers;
@@ -16,6 +17,7 @@ public class OrganizationController : ControllerBase
         _orgService = orgService;
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<OrgResponseDto>> Create([FromBody] CreateOrgRequestDto req)
     {

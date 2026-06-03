@@ -4,6 +4,7 @@ using System.Net.Cache;
 using InvoicePro.Application.DTOs.Organization;
 using InvoicePro.Application.Exceptions;
 using InvoicePro.Application.interfaces;
+using InvoicePro.Domain.Entities;
 using InvoicePro.Domain.Enums;
 using InvoicePro.Interfaces.Data.Repositories;
 
@@ -28,10 +29,14 @@ class OrganizationService : IOrganizationSerivce
 
     public async Task<OrgResponseDto> CreateOrganizationAsync(CreateOrgRequestDto req)
     {
+
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId) ??
          throw new AppException("User not found", HttpStatusCode.NotFound);
 
-        if (user.OrganizationId != Guid.Empty)
+
+        Console.WriteLine(user.OrganizationId + "org id ");
+
+        if (user.OrganizationId != Guid.Empty && user.OrganizationId != null)
             throw new AppException(
               "User already has an organization",
               HttpStatusCode.BadRequest

@@ -49,7 +49,16 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
         ),
-        NameClaimType = JwtRegisteredClaimNames.Sub
+    };
+
+
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            Console.WriteLine(context.Exception.Message);
+            return Task.CompletedTask;
+        }
     };
 });
 
