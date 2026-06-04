@@ -49,6 +49,8 @@ public class CurrentUser : ICurrentUser
     {
         return _httpContextAccessor.HttpContext?
             .User?
-            .FindFirst(claimType)?.Value;
+            .FindFirst(claimType)?.Value ?? throw new AppException(
+            $"Missing claim: {claimType}",
+            HttpStatusCode.Unauthorized);
     }
 }

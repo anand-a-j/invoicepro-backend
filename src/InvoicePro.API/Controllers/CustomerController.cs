@@ -18,6 +18,7 @@ public class CustomersController : ControllerBase
         _customerService = customerService;
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateCustomerRequestDto req)
     {
@@ -25,6 +26,7 @@ public class CustomersController : ControllerBase
         return Ok(ApiResponse<CustomerResponseDto>.Ok(result, "Customer added successfully"));
     }
 
+    [Authorize]
     [HttpPut("{customerId}")]
     public async Task<IActionResult> Update( Guid customerId, [FromBody] UpdateCustomerRequestDto req)
     {
@@ -32,6 +34,7 @@ public class CustomersController : ControllerBase
         return Ok(ApiResponse<CustomerResponseDto>.Ok(result, "Customer updated successfully"));
     }
 
+    [Authorize]
     [HttpDelete("{customerId}")]
     public async Task<IActionResult> Delete(Guid customerId)
     {

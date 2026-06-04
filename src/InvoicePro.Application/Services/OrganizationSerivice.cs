@@ -68,7 +68,7 @@ class OrganizationService : IOrganizationSerivce
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
         ?? throw new AppException("User not found", HttpStatusCode.NotFound);
 
-        if (user.OrganizationId == Guid.Empty)
+        if (user.OrganizationId != Guid.Empty && user.OrganizationId != null)
             throw new AppException(
                 "User does not belong to any organization",
                 HttpStatusCode.BadRequest

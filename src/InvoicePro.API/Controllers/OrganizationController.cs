@@ -25,6 +25,7 @@ public class OrganizationController : ControllerBase
         return Ok(ApiResponse<OrgResponseDto>.Ok(result, "Organization created successfully"));
     }
 
+    [Authorize]
     [HttpPut]
     public async Task<ActionResult<OrgResponseDto>> Update(UpdateOrgRequestDto req)
     {

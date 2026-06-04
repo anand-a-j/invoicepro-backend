@@ -20,6 +20,15 @@ class CustomerService : ICustomerService
         _userRepository = userRepository;
     }
 
+
+//     var user = await _userRepository.GetByIdAsync(_currentUser.UserId) ??
+//  throw new AppException("User not found", HttpStatusCode.NotFound);
+
+
+//     Console.WriteLine(user.OrganizationId + "org id ");
+
+//         if (user.OrganizationId != Guid.Empty && user.OrganizationId != null)
+
     public async Task<CustomerResponseDto> CreateAsync(CreateCustomerRequestDto req)
     {
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId) ??
