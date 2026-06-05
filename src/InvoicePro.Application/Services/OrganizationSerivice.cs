@@ -68,24 +68,18 @@ class OrganizationService : IOrganizationSerivce
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
         ?? throw new AppException("User not found", HttpStatusCode.NotFound);
 
-        if (user.OrganizationId != Guid.Empty && user.OrganizationId != null)
-            throw new AppException(
-                "User does not belong to any organization",
-                HttpStatusCode.BadRequest
-            );
-
         if (_currentUser.Role != UserRole.Owner)
             throw new AppException(
                 "Only owner can update organization",
                 HttpStatusCode.Forbidden
             );
 
-        if (user.OrganizationId == null)
+        if (user.OrganizationId == null || user.OrganizationId == Guid.Empty)
             throw new AppException(
                 "User does not belong to any organization",
                 HttpStatusCode.BadRequest
             );
-
+            
         var orgId = user.OrganizationId.Value;
 
         var organization = await _orgRepository.GetByIdAsync(orgId)

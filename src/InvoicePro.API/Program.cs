@@ -52,7 +52,6 @@ builder.Services.AddAuthentication(options =>
         ),
     };
 
-
     options.Events = new JwtBearerEvents
     {
         OnAuthenticationFailed = context =>
