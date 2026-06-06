@@ -1,4 +1,5 @@
 using InvoicePro.API.Core;
+using InvoicePro.Application.DTOs.Common;
 using InvoicePro.Application.DTOs.Customer;
 using InvoicePro.Application.interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +19,14 @@ public class CustomersController : ControllerBase
         _customerService = customerService;
     }
 
-    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetList([FromBody] GetCustomerRequestDto req)
+    {
+        var result = await _customerService.GetListAsync(req);
+
+        return Ok(ApiResponse<PagedResultDto<CustomerResponseDto>>.Ok(result));
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateCustomerRequestDto req)
     {
@@ -26,19 +34,17 @@ public class CustomersController : ControllerBase
         return Ok(ApiResponse<CustomerResponseDto>.Ok(result, "Customer added successfully"));
     }
 
-    [Authorize]
     [HttpPut("{customerId}")]
-    public async Task<IActionResult> Update( Guid customerId, [FromBody] UpdateCustomerRequestDto req)
+    public async Task<IActionResult> Update(Guid customerId, [FromBody] UpdateCustomerRequestDto req)
     {
         var result = await _customerService.UpdateAsync(customerId, req);
         return Ok(ApiResponse<CustomerResponseDto>.Ok(result, "Customer updated successfully"));
     }
 
-    [Authorize]
     [HttpDelete("{customerId}")]
     public async Task<IActionResult> Delete(Guid customerId)
     {
         await _customerService.DeleteAsync(customerId);
-        return Ok(ApiResponse<bool>.Ok(true,"Customer deleted successfully"));
+        return Ok(ApiResponse<bool>.Ok(true, "Customer deleted successfully"));
     }
 }

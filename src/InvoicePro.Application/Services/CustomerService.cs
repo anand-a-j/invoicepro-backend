@@ -123,7 +123,7 @@ class CustomerService : ICustomerService
     }
 
     public async Task<PagedResultDto<CustomerResponseDto>>
-    GetListAsync(GetCustomerListRequestDto req)
+    GetListAsync(GetCustomerRequestDto req)
     {
         var user = await _userRepository.GetByIdAsync(_currentUser.UserId)
         ?? throw new AppException("User not found", HttpStatusCode.NotFound);

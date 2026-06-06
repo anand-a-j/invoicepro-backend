@@ -29,7 +29,7 @@ public class InvoiceController : ControllerBase
         ));
     }
 
-    [HttpPut] 
+    [HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdateInvoiceRequestDto req)
     {
         var result = await _invoiceService.UpdateAsync(req);
@@ -38,9 +38,9 @@ public class InvoiceController : ControllerBase
             "Invoice updated successfully"
         ));
     }
-    
+
     [HttpGet]
-    public async Task<IActionResult> GetList([FromQuery] GetInvoiceListRequestDto req)
+    public async Task<IActionResult> GetList([FromBody] GetInvoiceListRequestDto req)
     {
         var result = await _invoiceService.GetListAsync(req);
         return Ok(ApiResponse<PagedResultDto<InvoiceResponseDto>>.Ok(result));

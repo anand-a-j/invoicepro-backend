@@ -15,5 +15,5 @@ public interface ICustomerService
     Task DeleteAsync(Guid customerId);
 
     Task<PagedResultDto<CustomerResponseDto>>
-    GetListAsync(GetCustomerListRequestDto req);
+    GetListAsync(GetCustomerRequestDto req);
 }
