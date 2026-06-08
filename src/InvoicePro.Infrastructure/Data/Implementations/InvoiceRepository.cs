@@ -21,9 +21,25 @@ public class InvoiceRepository : IInvoiceRepository
         await _db.SaveChangesAsync();
     }
 
+
     public async Task<Invoice?> GetByIdAsync(Guid id)
     {
-        return await _db.Invoices.FirstOrDefaultAsync(x => x.Id == id);
+        var invoice = await _db.Invoices
+            .Include(x => x.Items)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        Console.WriteLine($"Invoice Id: {invoice.Id}");
+        Console.WriteLine($"Invoice Number: {invoice.InvoiceNumber}");
+        Console.WriteLine($"Total Amount: {invoice.TotalAmount}");
+
+        foreach (var item in invoice.Items)
+        {
+            Console.WriteLine(
+                $"Item: {item.Description} - {item.Amount}"
+            );
+        }
+        return await _db.Invoices
+            .Include(x => x.Items)
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task UpdateAsync(Invoice invoice)
@@ -41,15 +57,15 @@ public class InvoiceRepository : IInvoiceRepository
     public async Task<(List<InvoiceResponseDto> Items, int TotalCount)> GetPagedAsync(
         Guid orgId, int page, int pageSize, string? search)
     {
-     var query = from invoice in _db.Invoices.AsNoTracking()
-            join customer in _db.Customers.AsNoTracking()
-            on invoice.CustomerId equals customer.Id
-            where invoice.OrganizationId == orgId
-            select new { invoice , customer};
+        var query = from invoice in _db.Invoices.AsNoTracking()
+                    join customer in _db.Customers.AsNoTracking()
+                    on invoice.CustomerId equals customer.Id
+                    where invoice.OrganizationId == orgId
+                    select new { invoice, customer };
 
         if (!string.IsNullOrWhiteSpace(search))
         {
-            query = query.Where(x=>
+            query = query.Where(x =>
             x.invoice.InvoiceNumber.Contains(search)
             );
         }
@@ -57,7 +73,7 @@ public class InvoiceRepository : IInvoiceRepository
         var totalCount = await query.CountAsync();
 
         var items = await query.OrderByDescending(x => x.invoice.IssueDate)
-                   .Skip((page-1)* pageSize)
+                   .Skip((page - 1) * pageSize)
                    .Take(pageSize)
                    .Select(x => new InvoiceResponseDto
                    {
@@ -78,27 +94,18 @@ public class InvoiceRepository : IInvoiceRepository
                            Address = x.customer.Address
                        },
 
-                       Items = new List<InvoiceItemResponseDto>()
+                       Items = x.invoice.Items.Select(item => new InvoiceItemResponseDto
+                       {
+                           Id = item.Id,
+                           Description = item.Description,
+                           Amount = item.Amount,
+                       }).ToList()
                    }
                    ).ToListAsync();
 
-                 return (items, totalCount);
+        return (items, totalCount);
 
-    //    var query = _db.Invoices.AsNoTracking().Where(x=> x.OrganizationId == orgId);
 
-    //     if (!string.IsNullOrWhiteSpace(search))
-    //     {
-    //         query = query.Where(x=> x.InvoiceNumber.Contains(search));
-    //     } 
-
-    //     var TotalCount = await query.CountAsync();
-
-    //     var items = await query.OrderByDescending(x => x.IssueDate)
-    //     .Skip((page -1) * pageSize)
-    //     .Take(pageSize)
-    //     .ToListAsync();
-
-    //     return (items, TotalCount);
     }
 
     public async Task<int?> GetLastSequenceNumberAsync(Guid orgId)
