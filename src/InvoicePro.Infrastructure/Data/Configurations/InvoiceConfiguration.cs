@@ -36,9 +36,17 @@ public class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder.Property(x => x.Status)
             .IsRequired();
 
-        //to map backing field for aggregate items
-        builder.Metadata
-            .FindNavigation(nameof(Invoice.Items))!
-            .SetPropertyAccessMode(PropertyAccessMode.Field);
+        // //to map backing field for aggregate items
+        // builder.Metadata
+        //     .FindNavigation(nameof(Invoice.Items))!
+        //     .SetPropertyAccessMode(PropertyAccessMode.Field);
+        builder.HasMany(x => x.Items)
+           .WithOne()
+           .HasForeignKey("InvoiceId")
+           .IsRequired()
+           .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Navigation(x => x.Items)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

@@ -37,13 +37,18 @@ public class InvoiceRepository : IInvoiceRepository
                 $"Item: {item.Description} - {item.Amount}"
             );
         }
-        return await _db.Invoices
-            .Include(x => x.Items)
-            .FirstOrDefaultAsync(x => x.Id == id);
+        return invoice;
     }
 
     public async Task UpdateAsync(Invoice invoice)
     {
+
+        foreach (var entry in _db.ChangeTracker.Entries())
+        {
+            Console.WriteLine(
+                $"{entry.Entity.GetType().Name} : {entry.State}"
+            );
+        }
         _db.Invoices.Update(invoice);
         await _db.SaveChangesAsync();
     }
