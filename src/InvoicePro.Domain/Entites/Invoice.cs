@@ -40,11 +40,11 @@ public class Invoice : BaseEntity
         Status = InvoiceStatus.Draft;
     }
 
-    public void AddItem(string description, decimal amount)
+    public void AddItem(Guid invoiceId ,string description, decimal amount)
     {
         EnsureEditable();
 
-        Items.Add(new InvoiceItem(description, amount));
+        Items.Add(new InvoiceItem(invoiceId ,description, amount));
 
         RecalculateTotals();
     }

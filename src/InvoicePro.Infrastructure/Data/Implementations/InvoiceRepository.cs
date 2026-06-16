@@ -43,13 +43,13 @@ public class InvoiceRepository : IInvoiceRepository
     public async Task UpdateAsync(Invoice invoice)
     {
 
-        foreach (var entry in _db.ChangeTracker.Entries())
+        foreach (var entry in _db.ChangeTracker.Entries<InvoiceItem>())
         {
             Console.WriteLine(
-                $"{entry.Entity.GetType().Name} : {entry.State}"
+                $"Id={entry.Entity.Id}, State={entry.State}"
             );
         }
-        _db.Invoices.Update(invoice);
+        // _db.Invoices.Update(invoice);
         await _db.SaveChangesAsync();
     }
 
