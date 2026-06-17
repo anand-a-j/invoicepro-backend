@@ -11,6 +11,7 @@ public class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder.ToTable("Invoices");
 
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).ValueGeneratedNever();
 
         builder.Property(x => x.OrganizationId)
             .IsRequired();

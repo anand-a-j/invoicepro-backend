@@ -46,7 +46,7 @@ public class InvoiceRepository : IInvoiceRepository
         foreach (var entry in _db.ChangeTracker.Entries<InvoiceItem>())
         {
             Console.WriteLine(
-                $"Id={entry.Entity.Id}, State={entry.State}"
+                $"{entry.Entity.Id} - {entry.State}"
             );
         }
         // _db.Invoices.Update(invoice);

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InvoicePro.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+06ff96ae862ad53489bc393fd8d77c6956b71dbd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0a44ef01a3016fd841b59def75c9d3145281e17")]
 [assembly: System.Reflection.AssemblyProductAttribute("InvoicePro.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InvoicePro.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -74,7 +74,7 @@ class InvoiceService : IInvoiceService
 
         foreach (var item in req.Items)
         {
-            invoice.AddItem(invoice.Id, item.Description, item.Amount);
+            invoice.AddItem(item.Description, item.Amount);
         }
 
         await _invoiceRepository.AddAsync(invoice);
@@ -131,9 +131,21 @@ class InvoiceService : IInvoiceService
         new InvoiceItem(invoice.Id, i.Description, i.Amount)
         );
 
+        Console.WriteLine("OLD ITEMS");
+
+        foreach (var item in invoice.Items)
+        {
+            Console.WriteLine(item.Id);
+        }
+
         invoice.ReplaceItems(newItems);
 
-        Console.WriteLine("Invoice items currently in aggregate:");
+        Console.WriteLine("NEW ITEMS");
+
+        foreach (var item in invoice.Items)
+        {
+            Console.WriteLine(item.Id);
+        }
 
         foreach (var item in invoice.Items)
         {
