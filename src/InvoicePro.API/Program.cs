@@ -4,7 +4,6 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using InvoicePro.API.Extensions;
 using InvoicePro.Application;
-using InvoicePro.Application.Exceptions;
 using InvoicePro.Application.Extensions;
 using InvoicePro.Infrastructure;
 using InvoicePro.Infrastructure.Extensions;

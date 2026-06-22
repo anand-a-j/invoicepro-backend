@@ -2,6 +2,7 @@ using System.Net;
 using System.Text.Json;
 using InvoicePro.API.Core;
 using InvoicePro.Application.Exceptions;
+using InvoicePro.Domain.Exceptions;
 
 public class ExceptionMiddleware
 {
@@ -20,6 +21,11 @@ public class ExceptionMiddleware
         try
         {
             await _next(context);
+        }
+        catch (DomainException ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            await HandleExceptionAsync(context, ex);
         }
         catch (Exception ex)
         {
@@ -40,6 +46,11 @@ public class ExceptionMiddleware
         {
             statusCode = appException.StatusCode;
             message = appException.Message;
+        }
+        else if (exception is DomainException domainException)
+        {
+            statusCode = HttpStatusCode.BadRequest;
+            message = domainException.Message;
         }
         context.Response.StatusCode = (int)statusCode;
         var response = ApiResponse<object>.Fail(

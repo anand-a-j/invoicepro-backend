@@ -1,6 +1,3 @@
-
-
-
 InvoicePro/
 │
 ├── InvoicePro.sln
@@ -12,11 +9,8 @@ InvoicePro/
 │   │   │   ├── OrganizationsController.cs
 │   │   │   ├── CustomersController.cs
 │   │   │   ├── InvoicesController.cs
-│   │   │   ├── PaymentsController.cs
-│   │   │   └── ReportsController.cs
 │   │   ├── Middlewares/
 │   │   │   ├── ExceptionHandlingMiddleware.cs
-│   │   │   └── TenantMiddleware.cs
 │   │   ├── Filters/
 │   │   │   └── ValidationFilter.cs
 │   │   ├── Extensions/
@@ -48,12 +42,6 @@ InvoicePro/
 │   │   │   │   ├── CreateInvoiceDto.cs
 │   │   │   │   ├── UpdateInvoiceDto.cs
 │   │   │   │   ├── InvoiceLineItemDto.cs
-│   │   │   │   └── InvoiceSummaryDto.cs
-│   │   │   ├── Payments/
-│   │   │   │   ├── PaymentDto.cs
-│   │   │   │   └── CreatePaymentDto.cs
-│   │   │   └── Reports/
-│   │   │       └── RevenueReportDto.cs
 │   │   ├── Services/
 │   │   │   ├── Interfaces/
 │   │   │   │   ├── IAuthService.cs
@@ -61,16 +49,12 @@ InvoicePro/
 │   │   │   │   ├── ICustomerService.cs
 │   │   │   │   ├── IServiceCatalogService.cs
 │   │   │   │   ├── IInvoiceService.cs
-│   │   │   │   ├── IPaymentService.cs
-│   │   │   │   └── IReportService.cs
 │   │   │   └── Implementations/
 │   │   │       ├── AuthService.cs
 │   │   │       ├── OrganizationService.cs
 │   │   │       ├── CustomerService.cs
 │   │   │       ├── ServiceCatalogService.cs
 │   │   │       ├── InvoiceService.cs
-│   │   │       ├── PaymentService.cs
-│   │   │       └── ReportService.cs
 │   │   ├── Validators/
 │   │   │   ├── CreateInvoiceValidator.cs
 │   │   │   ├── CreateCustomerValidator.cs
@@ -108,7 +92,6 @@ InvoicePro/
 │       │       ├── ServiceConfiguration.cs
 │       │       ├── InvoiceConfiguration.cs
 │       │       ├── InvoiceLineItemConfiguration.cs
-│       │       └── PaymentConfiguration.cs
 │       ├── Repositories/
 │       │   ├── Interfaces/
 │       │   │   ├── IRepository.cs
@@ -117,7 +100,6 @@ InvoicePro/
 │       │   │   ├── ICustomerRepository.cs
 │       │   │   ├── IServiceRepository.cs
 │       │   │   ├── IInvoiceRepository.cs
-│       │   │   └── IPaymentRepository.cs
 │       │   └── Implementations/
 │       │       ├── Repository.cs
 │       │       ├── UserRepository.cs
@@ -125,7 +107,6 @@ InvoicePro/
 │       │       ├── CustomerRepository.cs
 │       │       ├── ServiceRepository.cs
 │       │       ├── InvoiceRepository.cs
-│       │       └── PaymentRepository.cs
 │       ├── Identity/
 │       │   ├── JwtTokenGenerator.cs
 │       │   └── PasswordHasher.cs

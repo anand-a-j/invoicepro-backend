@@ -15,8 +15,6 @@ public static class ApplicationServiceCollectionExtensions
         services.AddScoped<IInvoiceService, InvoiceService>();
         services.AddScoped<IOrganizationSerivce, OrganizationService>();
 
-
-
         return services;
     }
 }

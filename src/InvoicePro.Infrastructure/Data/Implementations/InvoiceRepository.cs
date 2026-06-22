@@ -27,29 +27,11 @@ public class InvoiceRepository : IInvoiceRepository
         var invoice = await _db.Invoices
             .Include(x => x.Items)
             .FirstOrDefaultAsync(x => x.Id == id);
-        Console.WriteLine($"Invoice Id: {invoice.Id}");
-        Console.WriteLine($"Invoice Number: {invoice.InvoiceNumber}");
-        Console.WriteLine($"Total Amount: {invoice.TotalAmount}");
-
-        foreach (var item in invoice.Items)
-        {
-            Console.WriteLine(
-                $"Item: {item.Description} - {item.Amount}"
-            );
-        }
         return invoice;
     }
 
     public async Task UpdateAsync(Invoice invoice)
     {
-
-        foreach (var entry in _db.ChangeTracker.Entries<InvoiceItem>())
-        {
-            Console.WriteLine(
-                $"{entry.Entity.Id} - {entry.State}"
-            );
-        }
-        // _db.Invoices.Update(invoice);
         await _db.SaveChangesAsync();
     }
 

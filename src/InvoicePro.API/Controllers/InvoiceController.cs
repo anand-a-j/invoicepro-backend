@@ -53,7 +53,7 @@ public class InvoiceController : ControllerBase
         return Ok(ApiResponse<bool>.Ok(true, "Invoice deleted successfully"));
     }
 
-    [HttpPost("{id:guid}/mark-paid")]
+    [HttpPatch("{id:guid}/mark-paid")]
     public async Task<IActionResult> MarkAsPaid(Guid id)
     {
         await _invoiceService.MarkAsPaidAsync(id);
