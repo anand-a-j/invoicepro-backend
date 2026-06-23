@@ -2,6 +2,7 @@
 
 InvoicePro is a RESTful Invoice Management API built with ASP.NET Core, PostgreSQL, and Clean Architecture principles, featuring JWT authentication and customer, invoice, and organization management. It demonstrates modern .NET backend development practices including Repository Pattern, Dependency Injection, Entity Framework Core, and scalable layered architecture.
 
+```mermaid
 flowchart LR
 
     Client["👨‍💻 Client App"]
@@ -22,36 +23,18 @@ flowchart LR
     InvoiceService
     OrganizationService"]
 
-    Services --> Domain["🏛️ Domain Layer
-    User
-    Customer
-    Invoice
-    InvoiceItem
-    Organization"]
+    Services --> Domain["🏛️ Domain Layer"]
 
-    Services --> Repositories["📂 Repositories
-    UserRepository
-    CustomerRepository
-    InvoiceRepository
-    OrganizationRepository"]
+    Services --> Repositories["📂 Repositories"]
 
     Services --> JWT["🔐 JWT Token Generator"]
+
     Services --> Hasher["🔑 Password Hasher"]
 
     Repositories --> EF["⚙️ Entity Framework Core"]
 
     EF --> DB[("🐘 PostgreSQL")]
-
-    classDef primary fill:#2563eb,color:white
-    classDef secondary fill:#059669,color:white
-    classDef security fill:#dc2626,color:white
-    classDef db fill:#7c3aed,color:white
-
-    class API,Middleware,Controllers,Services primary
-    class Domain,Repositories,EF secondary
-    class JWT,Hasher security
-    class DB db
-
+```
 
 ## Technical Highlights
 - Clean Architecture principles
