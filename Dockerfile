@@ -4,16 +4,16 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
 # Copy csproj files first (leverages Docker layer caching)
-COPY ["InvoicePro.API/InvoicePro.API.csproj", "InvoicePro.API/"]
-COPY ["InvoicePro.Application/InvoicePro.Application.csproj", "InvoicePro.Application/"]
-COPY ["InvoicePro.Domain/InvoicePro.Domain.csproj", "InvoicePro.Domain/"]
-COPY ["InvoicePro.Infrastructure/InvoicePro.Infrastructure.csproj", "InvoicePro.Infrastructure/"]
+COPY ["src/InvoicePro.API/InvoicePro.API.csproj", "src/InvoicePro.API/"]
+COPY ["src/InvoicePro.Application/InvoicePro.Application.csproj", "src/InvoicePro.Application/"]
+COPY ["src/InvoicePro.Domain/InvoicePro.Domain.csproj", "src/InvoicePro.Domain/"]
+COPY ["src/InvoicePro.Infrastructure/InvoicePro.Infrastructure.csproj", "src/InvoicePro.Infrastructure/"]
 
-RUN dotnet restore "InvoicePro.API/InvoicePro.API.csproj"
+RUN dotnet restore "src/InvoicePro.API/InvoicePro.API.csproj"
 
 # Now copy everything else and build
 COPY . .
-WORKDIR "/src/InvoicePro.API"
+WORKDIR "/src/src/InvoicePro.API"
 RUN dotnet build "InvoicePro.API.csproj" -c Release -o /app/build
 
 # Publish Stage
