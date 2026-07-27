@@ -71,7 +71,7 @@ This project uses environment variables to keep secrets out of source control.
    | `DB_PASSWORD` | PostgreSQL password                   |
    | `JWT_SECRET`  | Secret key used to sign JWT tokens    |
 
-### Running with Docker (recommended)
+### Running with Docker
 This spins up both the API and a PostgreSQL container:
 ```bash
 docker compose up --build
