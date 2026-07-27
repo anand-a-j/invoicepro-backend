@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("2b1c1abe-2e00-44d3-8c36-60c1138c5798")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("InvoicePro.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf35402c7e91dd8f7b94b24f451553c8c37da4ad")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51bdee3646f1f5f44b715a5b863815eb57cca533")]
 [assembly: System.Reflection.AssemblyProductAttribute("InvoicePro.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InvoicePro.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
